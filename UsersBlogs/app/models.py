@@ -13,4 +13,7 @@ class Post(models.Model):
     def __str__(self):
         return self.caption
 
+class Subscription(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    blogger = models.ForeignKey(User,on_delete=models.CASCADE, related_name='+')
 # Create your models here.
