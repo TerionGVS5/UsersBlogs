@@ -17,6 +17,7 @@ import app.views
 urlpatterns = [
     # Examples:
     url(r'^$', app.views.home, name='home'),
+    url(r'^private_office$', app.views.PrivateOfficeView.as_view(), name='private_office'),
     url(r'^login/$',
         django.contrib.auth.views.login,
         {
@@ -26,8 +27,10 @@ urlpatterns = [
             {
                 'title': 'Войти',
                 'year': datetime.now().year,
+                
             }
         },
+
         name='login'),
     url(r'^logout$',
         django.contrib.auth.views.logout,
