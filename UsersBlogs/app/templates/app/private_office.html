@@ -3,6 +3,37 @@
 {% block content %}
 
 <h2>{{ title }}</h2>
-
+<h3>Добавьте новый пост в свой блог</h3>
+<form action="/private_office" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <br />
+ <input type="submit" value="Добавить" class="btn btn-default" />
+</form>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Здесь будут отображаться ваши посты</h4>
+        {% if posts %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>Заголовок</th>
+                  <th>Текст</th>
+                   <th>Время</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                  <td>{{post.caption}}</td>
+                  <td>{{post.text}}</td>
+                  <td>{{post.time}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
 
 {% endblock %}
