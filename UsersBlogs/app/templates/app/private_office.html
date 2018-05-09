@@ -30,12 +30,19 @@
             <thead>
                 <tr>
                   <th>Блоггер</th>
+                  <th>Отписаться</th>
                 </tr>
             </thead>
             <tbody>
                 {% for sub in subs %}
                 <tr>
                   <td>{{sub.blogger.username}}</td>
+                  <td>
+                      <a href="private_office/unsub/{{ sub.pk }}/">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true" >
+                        </span>
+                      </a>
+                  </td>
                 </tr>
                 {% endfor %}
             </tbody>

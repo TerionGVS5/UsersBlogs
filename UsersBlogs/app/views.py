@@ -82,3 +82,10 @@ class MakeSubView(LoginRequiredMixin, View):
             get_blogger = form_bloggerselect.cleaned_data['bloggers']
             Subscription.objects.create(user=request.user,blogger = get_blogger)
             return HttpResponseRedirect('/private_office')
+
+@login_required(login_url='/login/')
+def unsubView(request,pk):
+    get_subscription = get_object_or_404(Subscription, pk=pk)
+    if get_subscription.user == request.user:
+        get_subscription.delete()
+    return HttpResponseRedirect('/private_office')
