@@ -19,7 +19,8 @@
                 <tr>
                   <th>Заголовок</th>
                   <th>Текст</th>
-                   <th>Время</th>
+                  <th>Время</th>
+                  <th>Удаление</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,12 @@
                   <td>{{post.caption}}</td>
                   <td>{{post.text}}</td>
                   <td>{{post.time}}</td>
+                  <td>
+                      <a href="private_office/delete_post/{{ post.pk }}/">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true" >
+                        </span>
+                      </a>
+                  </td>
                 </tr>
                 {% endfor %}
             </tbody>

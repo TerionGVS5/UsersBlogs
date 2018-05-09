@@ -18,6 +18,7 @@ urlpatterns = [
     # Examples:
     url(r'^$', app.views.home, name='home'),
     url(r'^private_office$', app.views.PrivateOfficeView.as_view(), name='private_office'),
+    url(r'^private_office/delete_post/(?P<pk>[0-9]+)/$', app.views.deletePostView, name='delete_post'),
     url(r'^login/$',
         django.contrib.auth.views.login,
         {

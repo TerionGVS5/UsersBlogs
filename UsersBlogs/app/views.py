@@ -10,6 +10,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from app.forms import PostAddForm
 from app.models import Post
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
 
 def home(request):
     """Renders the home page."""
@@ -44,4 +47,9 @@ class PrivateOfficeView(LoginRequiredMixin, View):
         else:
             return render(request,self.template_name, {'title':self.title,'form':form, 'posts':posts})
 
- 
+@login_required(login_url='/login/')
+def deletePostView(request,pk):
+    post = get_object_or_404(Post, pk=pk)
+    if post.owner == request.user:
+        post.delete()
+    return HttpResponseRedirect('/private_office')
