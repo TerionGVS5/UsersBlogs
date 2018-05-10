@@ -16,4 +16,8 @@ class Post(models.Model):
 class Subscription(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     blogger = models.ForeignKey(User,on_delete=models.CASCADE, related_name='+')
+
+class Reading(models.Model):
+    reader = models.ForeignKey(User,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
 # Create your models here.

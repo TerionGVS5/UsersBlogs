@@ -9,11 +9,13 @@ from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from app.forms import PostAddForm, BloggerSelectForm
-from app.models import Post, Subscription
+from app.models import Post, Subscription, Reading
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+
 
 def home(request):
     """Renders the home page."""
@@ -97,4 +99,30 @@ class NewsFeedView(LoginRequiredMixin, View):
     def get(self, request):
         get_bloggers = Subscription.objects.all().filter(user=request.user).values_list('blogger')
         get_posts=Post.objects.all().filter(owner__in=get_bloggers).order_by('time')
-        return render(request,self.template_name, {'title':self.title, 'posts':get_posts})
+        get_readings=Reading.objects.all().filter(reader=request.user).values_list('post')
+        arr_readings = []
+        for el in get_readings:
+            arr_readings.append(el[0])
+        return render(request,self.template_name, {'title':self.title, 'posts':get_posts, 'readings':arr_readings})
+
+@login_required(login_url='/login/')
+def makeUnreaded(request,pk):
+    get_post = get_object_or_404(Post, pk=pk)
+    # Если пользователь пытается пометить непрочитанным и так непрочитанный пост
+    try:
+        get_reading = Reading.objects.get(reader=request.user,post=get_post)
+        get_reading.delete()
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect('/news_feed')
+    return HttpResponseRedirect('/news_feed')
+
+@login_required(login_url='/login/')
+def makeReaded(request,pk):
+    get_post = get_object_or_404(Post, pk=pk)
+    # Если пользователь пытается пометить прочитанным и так прочитанный пост
+    try:
+        get_reading = Reading.objects.get(reader=request.user,post=get_post)
+    except ObjectDoesNotExist:
+        new_reading = Reading.objects.create(reader=request.user,post=get_post)
+        return HttpResponseRedirect('/news_feed')
+    return HttpResponseRedirect('/news_feed')
