@@ -28,3 +28,9 @@
 > python manage.py createsuperuser
 ***
 Подробная работа с manage.py в официальной документации https://docs.djangoproject.com/en/1.10/ref/django-admin/
+***
+Примеры работы:
+----------------------------------
+![screenshot of sample1](https://github.com/TerionGVS5/UsersBlogs/blob/master/example1.png)
+***
+![screenshot of sample2](https://github.com/TerionGVS5/UsersBlogs/blob/master/exampale2.png)
