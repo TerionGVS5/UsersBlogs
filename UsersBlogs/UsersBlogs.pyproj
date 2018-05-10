@@ -56,6 +56,7 @@
     <Folder Include="UsersBlogs\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\post_detail.html" />
     <Content Include="app\templates\app\news_feed.html" />
     <Content Include="app\templates\app\private_office.html" />
     <Content Include="requirements.txt" />

@@ -63,17 +63,24 @@
                   <th>Текст</th>
                   <th>Время</th>
                   <th>Удаление</th>
+                   <th>Ссылка</th>
                 </tr>
             </thead>
             <tbody>
                 {% for post in posts %}
                 <tr>
                   <td>{{post.caption}}</td>
-                  <td>{{post.text}}</td>
+                  <td>{{post.text|truncatewords:10}}</td>
                   <td>{{post.time}}</td>
                   <td>
                       <a href="private_office/delete_post/{{ post.pk }}/">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true" >
+                        </span>
+                      </a>
+                  </td>
+                  <td>
+                      <a href="private_office/post_detail/{{ post.pk }}/">
+                        <span class="glyphicon glyphicon-link" aria-hidden="true" >
                         </span>
                       </a>
                   </td>

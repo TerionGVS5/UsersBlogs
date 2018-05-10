@@ -15,7 +15,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.views.generic import DetailView
 
 def home(request):
     """Renders the home page."""
@@ -130,3 +130,9 @@ def makeReaded(request,pk):
         new_reading = Reading.objects.create(reader=request.user,post=get_post)
         return HttpResponseRedirect('/news_feed')
     return HttpResponseRedirect('/news_feed')
+
+class PostDetailView(LoginRequiredMixin, DetailView):
+    template_name='app/post_detail.html'
+    login_url = '/login/'
+    title='Полная информация о посте'
+    model = Post

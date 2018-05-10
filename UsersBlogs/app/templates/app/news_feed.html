@@ -17,6 +17,7 @@
                     <th>Пометка о прочитанности</th>
                     <th>Пометить непрочитанным</th>
                     <th>Пометить прочитанным</th>
+                    <th>Ссылка</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +25,7 @@
                 <tr>
                   <td>{{post.owner.username}}</td>
                   <td>{{post.caption}}</td>
-                  <td>{{post.text}}</td>
+                  <td>{{post.text|truncatewords:10}}</td>
                    <td>{{post.time}}</td>
                     {% if post.pk in readings %}
                     <td>
@@ -49,6 +50,12 @@
                         </span>
                       </a>
                     </td>
+                     <td>
+                      <a href="private_office/post_detail/{{ post.pk }}/">
+                        <span class="glyphicon glyphicon-link" aria-hidden="true" >
+                        </span>
+                      </a>
+                  </td>
                 </tr>
                 {% endfor %}
             </tbody>
