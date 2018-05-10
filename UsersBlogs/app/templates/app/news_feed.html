@@ -1,0 +1,34 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<div class="row">
+    <div class="col-md-12">
+    <h4>Лента новостей</h4>
+        {% if posts %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>Блоггер</th>
+                  <th>Заголовок</th>
+                    <th>Текст</th>
+                    <th>Время</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                  <td>{{post.owner.username}}</td>
+                  <td>{{post.caption}}</td>
+                  <td>{{post.text}}</td>
+                   <td>{{post.time}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

@@ -89,3 +89,12 @@ def unsubView(request,pk):
     if get_subscription.user == request.user:
         get_subscription.delete()
     return HttpResponseRedirect('/private_office')
+
+class NewsFeedView(LoginRequiredMixin, View):
+    template_name='app/news_feed.html'
+    login_url = '/login/'
+    title='Лента новостей'
+    def get(self, request):
+        get_bloggers = Subscription.objects.all().filter(user=request.user).values_list('blogger')
+        get_posts=Post.objects.all().filter(owner__in=get_bloggers).order_by('time')
+        return render(request,self.template_name, {'title':self.title, 'posts':get_posts})

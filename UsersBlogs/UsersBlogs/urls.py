@@ -18,6 +18,7 @@ urlpatterns = [
     # Examples:
     url(r'^$', app.views.home, name='home'),
     url(r'^private_office$', app.views.PrivateOfficeView.as_view(), name='private_office'),
+    url(r'^news_feed$', app.views.NewsFeedView.as_view(), name='news_feed'),
     url(r'^private_office/delete_post/(?P<pk>[0-9]+)/$', app.views.deletePostView, name='delete_post'),
     url(r'^private_office/unsub/(?P<pk>[0-9]+)/$', app.views.unsubView, name='unsub'),
     url(r'^private_office/makesub$', app.views.MakeSubView.as_view(), name='make_sub'),
