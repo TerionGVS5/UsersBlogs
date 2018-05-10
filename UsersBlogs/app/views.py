@@ -89,6 +89,10 @@ class MakeSubView(LoginRequiredMixin, View):
 def unsubView(request,pk):
     get_subscription = get_object_or_404(Subscription, pk=pk)
     if get_subscription.user == request.user:
+        # Снятие отметок прочитанности
+        posts_this_blogger = Post.objects.all().filter(owner=get_subscription.blogger)
+        readings = Reading.objects.all().filter(post__in=posts_this_blogger)
+        readings.delete()
         get_subscription.delete()
     return HttpResponseRedirect('/private_office')
 
